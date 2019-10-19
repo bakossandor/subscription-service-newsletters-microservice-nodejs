@@ -1,13 +1,13 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 
-// const router = require('./router/router');
+const router = require('./router/router');
 
 const app = express();
 
 app.use(bodyParser.json());
 
-// router(app);
+router(app);
 
 app.get('/health', (req, res) => {
   res.sendStatus(200);
