@@ -1,4 +1,6 @@
 const { Pool } = require('pg');
+const generateUriHash = require('../lib/generate-uri-hash');
+
 const pool = new Pool();
 
 async function dbGetEveryNewsletter() {
@@ -9,8 +11,8 @@ async function dbGetEveryNewsletter() {
 }
 
 async function dbPostNewsletter(user_id, name) {
-  const queryString = 'INSERT INTO newsletters (user_id, name) VALUES ($1, $2)';
-  await pool.query(queryString, [...arguments]);
+  const queryString = 'INSERT INTO newsletters (user_id, name, uri) VALUES ($1, $2, $3)';
+  await pool.query(queryString, [...arguments, generateUriHash()]);
 }
 
 module.exports = {
